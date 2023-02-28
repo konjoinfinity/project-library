@@ -19,7 +19,7 @@ module.exports = function (app) {
         if (!data) {
           res.json([]);
         } else {
-          const formatData = data.map((book) => {
+          const dataToMap = data.map((book) => {
             return {
               _id: book._id,
               title: book.title,
@@ -27,7 +27,7 @@ module.exports = function (app) {
               commentcount: book.comments.length,
             };
           });
-          res.json(formatData);
+          res.json(dataToMap);
         }
       });
     })
@@ -38,8 +38,8 @@ module.exports = function (app) {
         res.send("missing required field title");
         return;
       }
-      const newBook = new Book({ title, comments: [] });
-      newBook.save((err, data) => {
+      const bookToAdd = new Book({ title, comments: [] });
+      bookToAdd.save((err, data) => {
         if (err || !data) {
           res.send("there was an error saving");
         } else {
