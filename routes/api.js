@@ -15,19 +15,15 @@ module.exports = function (app) {
     .get(function (req, res) {
       //response will be array of book objects
       //json res format: [{"_id": bookid, "title": book_title, "commentcount": num_of_comments },...]
-      Book.find({}, (err, data) => {
-        if (!data) {
-          res.json([]);
-        } else {
-          const dataToMap = data.map((book) => {
-            return {
-              _id: book._id,
-              title: book.title,
-              comments: book.comments,
-              commentcount: book.comments.length,
-            };
+      let bookArr = [];
+      Book.find({}, (error, results) => {
+        if(!error && results) {
+          results.forEach(result => {
+            const book = result.toJSON();
+            book['commentcount'] = book.comments.length;
+            bookArr.push(book)
           });
-          res.json(dataToMap);
+          return res.json(bookArr);
         }
       });
     })
