@@ -3,7 +3,7 @@ mongoose.Promise = Promise;
 let db;
 
 if (process.env.MONGO_URI) {
-db = mongoose.connect(process.env.DB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+db = mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
  console.log("Production Database Connection Successful")
 } else {
 db = mongoose.connect("mongodb://localhost/projectbook", { useNewUrlParser: true, useUnifiedTopology: true })
