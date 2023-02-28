@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 mongoose.Promise = Promise;
 let db;
 
-if (process.env.NODE_ENV == "production") {
+if (process.env.MONGO_URI) {
 db = mongoose.connect(process.env.DB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
  console.log("Production Database Connection Successful")
 } else {
