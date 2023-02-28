@@ -13,7 +13,6 @@ module.exports = function (app) {
   app
     .route("/api/books")
     .get(function (req, res) {
-      console.log("req.body :>> ", req.body);
       //response will be array of book objects
       //json res format: [{"_id": bookid, "title": book_title, "commentcount": num_of_comments },...]
       Book.find({}, (err, data) => {
